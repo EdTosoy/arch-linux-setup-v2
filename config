@@ -1,3 +1,4 @@
+
 # i3 config file (v4) - 100% Screen Usage / Gruvbox
 set $mod Mod4
 
@@ -10,32 +11,17 @@ gaps outer 0
 default_border pixel 2
 default_floating_border pixel 2
 smart_borders on
-hide_edge_borders both
 focus_follows_mouse no
 floating_modifier $mod
 
 # Autostart
-
-# Load XDG autostart (.desktop apps)
 exec --no-startup-id dex --autostart --environment i3
-
-# NetworkManager tray (optional but useful)
 exec --no-startup-id nm-applet
-
-# Compositor (comment out if you get glitches)
 exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
-
-# Disable screen blanking / DPMS
 exec_always --no-startup-id xset s off
 exec_always --no-startup-id xset -dpms
-
-# Fix cursor issues
 exec_always --no-startup-id xsetroot -cursor_name left_ptr
-
-# Wallpaper (MUST be exec_always)
 exec_always --no-startup-id feh --no-fehbg --bg-fill ~/.config/i3/batArch.webp
-
-# Display Setup (Corrected for your DP3 monitor)
 exec --no-startup-id xrandr --output DP3 --mode 1920x1080 --rate 100.00 --primary
 
 # Variables & Workspace Refresh
@@ -48,9 +34,8 @@ bindsym $mod+Shift+s exec feh --bg-scale ~/wallpapers/streetsig.jpg
 bindsym $mod+Return exec --no-startup-id kitty
 bindsym $mod+q kill
 bindsym $mod+d exec --no-startup-id rofi -show drun -font 'Hack 11'
-bindsym $mod+m exec ~/.config/i3/scripts/powermenu
 
-# --- CUSTOM APPLICATION SHORTCUTS ---
+# Custom Application Shortcuts
 bindsym $mod+n exec --no-startup-id kitty yazi
 bindsym $mod+w exec --no-startup-id zen-browser
 bindsym $mod+c exec --no-startup-id antigravity
@@ -68,7 +53,7 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# --- LAYOUT CONTROLS ---
+# Layout Controls
 bindsym $mod+f fullscreen toggle
 bindsym $mod+s layout stacking
 bindsym $mod+Shift+w layout tabbed
@@ -88,13 +73,6 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
-
-# Cycle through windows on the current workspace
-bindsym $mod+Tab focus next
-bindsym $mod+Shift+Tab focus prev
-
-workspace_auto_back_and_forth yes
-bindsym $mod+b workspace back_and_forth
 
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -140,19 +118,19 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# --- Audio Controls ---
-bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume @DEFAULT_SINK@ 5%+ --limit 1.0 && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-volume @DEFAULT_SINK@ 5%- && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioMute        exec --no-startup-id wpctl set-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+# Audio Controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume @DEFAULT_SINK@ 5%+ --limit 1.0
+bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-volume @DEFAULT_SINK@ 5%-
+bindsym XF86AudioMute        exec --no-startup-id wpctl set-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-# --- Media ---
+# Media
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym Print exec flameshot gui
 
-# --- COLORS (Gruvbox Green) ---
+# Colors (Gruvbox Green)
 set $bg #282828
 set $red #cc241d
 set $green #98971a
@@ -164,11 +142,9 @@ set $gray #a89984
 set $darkgray #1d2021
 set $white #ffffff
 
-# Window Decoration Colors
 client.focused          $green  $green  $darkgray $green    $green
 client.focused_inactive $darkgray $darkgray $yellow $darkgray $darkgray
 client.unfocused        $darkgray $darkgray $yellow $darkgray $darkgray
 client.urgent           $red    $red    $white    $red      $red
 
 gaps inner 1
-
